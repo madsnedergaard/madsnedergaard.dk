@@ -4,18 +4,13 @@ import cx from 'classnames';
 export default function Header() {
   return (
     <div className="mb-0 p-6">
-      <header className="flex flex-col items-center justify-between sm:flex-row">
-        <p
-          className={cx(
-            'bg-gradient-to-r from-[#3494E6] via-[#5961DF] to-[#EC6EAD] bg-clip-text text-transparent',
-            'mb-2 italic sm:mb-0'
-          )}
-        >
-          A post by Mads Nedergaard
-        </p>
+      <header className="flex flex-row items-center justify-between">
         <NavLink href="/" className="text-sm">
-          Return to frontpage
+          Return to index
         </NavLink>
+        <p className="animate-rainbow-text bg-gradient-to-r from-[#3494E6] via-[#5961DF] to-[#EC6EAD] bg-clip-text italic text-transparent dark:via-[#fcff9e] dark:to-[#EC6EAD]">
+          Writings of Mads Nedergaard
+        </p>
       </header>
     </div>
   );
