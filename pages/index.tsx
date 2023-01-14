@@ -61,7 +61,11 @@ const Home = ({ postsByYear }: HomeProps) => {
           </div>
         </section>
         <hr className="w-80 border-zinc-200 dark:border-zinc-600" />
-        <section className="flex max-w-lg flex-col">
+        <section
+          className={`flex max-w-lg flex-col ${
+            Object.keys(postsByYear).length < 1 ? 'hidden' : ''
+          }`}
+        >
           <p className="text-center text-xl">Writing</p>
           <div className="flex flex-col space-y-2 pt-2">
             {Object.entries(postsByYear)
