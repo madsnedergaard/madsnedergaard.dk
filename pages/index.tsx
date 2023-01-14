@@ -51,7 +51,9 @@ const Home = ({ postsByYear }: HomeProps) => {
           <p className="mb-1 animate-rainbow-text bg-gradient-to-r from-[#3494E6] via-[#5961DF] to-[#EC6EAD] bg-clip-text text-xl text-transparent dark:via-[#fcff9e] dark:to-[#EC6EAD] sm:text-2xl">
             A craftsman of the internet
           </p>
-          <p className="italic text-zinc-500">&ndash; or just another software engineer building digital products.</p>
+          <p className="italic text-zinc-500">
+            &ndash; or just another software engineer building digital products.
+          </p>
           <div className="mt-4 space-x-4">
             <NavLink href="https://twitter.com/mads_nedergaard">Twitter</NavLink>
             <NavLink href="https://github.com/madsnedergaard">Github</NavLink>
@@ -73,7 +75,12 @@ const Home = ({ postsByYear }: HomeProps) => {
                     </div>
                     <div className="flex w-full flex-col">
                       {posts.map((p) => (
-                        <PostLink key={p.slug} href={p.slug} updatedAt={p.data.updatedAt} tags={p.data.tags}>
+                        <PostLink
+                          key={p.slug}
+                          href={p.slug}
+                          updatedAt={p.data.updatedAt}
+                          tags={p.data.tags}
+                        >
                           {p.data.title}
                         </PostLink>
                       ))}
