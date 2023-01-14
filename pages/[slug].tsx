@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic';
 
 const components = {
   Highlight: dynamic(() => import('../components/Highlight')),
+  CoffeeComparisonTable: dynamic(() => import('../components/CoffeeComparisonTable')),
 };
 
 const IntroSection = ({ data }: { data: PostData }) => (
