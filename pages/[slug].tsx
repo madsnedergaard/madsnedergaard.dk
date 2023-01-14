@@ -39,7 +39,7 @@ export default function Post({ data, content }: PostProps) {
   return (
     <div>
       <Header />
-      <article className="container prose prose-zinc mx-auto pb-8 dark:prose-invert">
+      <article className="container prose prose-zinc mx-auto px-2 pb-8 dark:prose-invert">
         <IntroSection data={data} />
         <hr className="mx-auto my-8 w-80 border-zinc-200 dark:border-zinc-600" />
         <MDXRemote {...content} components={components} />
