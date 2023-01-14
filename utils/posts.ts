@@ -29,6 +29,11 @@ export const getPost = (slug: string): PostWithContent => {
 };
 
 export const getPosts = (): PostWithSlug[] => {
+  // Return empty object if path doesn't exist
+  if (!fs.existsSync(path.join('posts'))) {
+    return [];
+  }
+
   const files = fs.readdirSync(path.join('posts'));
   const allPostsData = files
     .filter((file) => path.extname(file) === '.mdx')
