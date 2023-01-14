@@ -2,12 +2,12 @@ module.exports = {
   semi: true,
   singleQuote: true,
   trailingComma: 'es5',
-  printWidth: 120,
   overrides: [
     {
-      files: '*.md',
+      files: '*.mdx',
       options: {
-        printWidth: 80,
+        proseWrap: 'always',
+        printWidth: 100,
       },
     },
   ],
