@@ -43,6 +43,9 @@ const Home = ({ postsByYear }: HomeProps) => {
         <meta name="description" content="Personal website of Mads Nedergaard, software engineer" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <header className="flex flex-row items-center justify-end pr-6 pt-6 text-sm">
+        <NavLinkInternal href="/about">About</NavLinkInternal>
+      </header>
 
       <main className="container mx-auto flex  flex-col items-center space-y-10  pt-10 pb-10 dark:text-white sm:pt-20">
         <section className="flex flex-col text-center">
