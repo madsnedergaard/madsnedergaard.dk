@@ -4,7 +4,7 @@ import NextLink from 'next/link';
 
 import React from 'react';
 import { getPosts, PostWithSlug } from '../utils/posts';
-import NavLink from '../components/NavLink';
+import { NavLink, NavLinkInternal } from '../components/NavLink';
 
 interface LinkProps {
   children: string;
@@ -14,7 +14,7 @@ interface LinkProps {
 }
 const PostLink = ({ children, updatedAt, tags, href }: LinkProps) => (
   <React.Fragment>
-    <NextLink href={href}>
+    <NextLink href={href} legacyBehavior>
       <a className="w-full rounded-md p-2 px-3 transition-all hover:bg-zinc-100 dark:hover:bg-zinc-900">
         <span className="block">{children}</span>
         <div className="mt-1 flex flex-wrap">
