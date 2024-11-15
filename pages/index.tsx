@@ -55,7 +55,7 @@ const Home = ({ postsByYear }: HomeProps) => {
             &ndash; or just another software engineer building digital products.
           </p>
           <div className="mt-4 space-x-4">
-            <NavLink href="https://twitter.com/mads_nedergaard">Twitter</NavLink>
+            <NavLink href="https://bsky.app/profile/madsnedergaard.dk">BlueSky</NavLink>
             <NavLink href="https://github.com/madsnedergaard">Github</NavLink>
             <NavLink href="https://linkedin.com/in/madsnedergaard">LinkedIn</NavLink>
           </div>
