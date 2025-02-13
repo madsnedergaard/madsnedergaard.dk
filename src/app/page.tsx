@@ -1,10 +1,10 @@
 import type { GetStaticProps } from 'next';
 import Head from 'next/head';
-import NextLink from 'next/link';
+import Link from 'next/link';
 
 import React from 'react';
 import { getPosts, PostWithSlug } from '../utils/posts';
-import NavLink from '../components/NavLink';
+import NavLink from '@/components/NavLink';
 
 interface LinkProps {
   children: string;
@@ -13,42 +13,36 @@ interface LinkProps {
   href: string;
 }
 const PostLink = ({ children, updatedAt, tags, href }: LinkProps) => (
-  <React.Fragment>
-    <NextLink href={href}>
-      <a className="w-full rounded-md p-2 px-3 transition-all hover:bg-zinc-100 dark:hover:bg-zinc-900">
-        <span className="block">{children}</span>
-        <div className="mt-1 flex flex-wrap">
-          <span className="mr-2 text-xs text-zinc-400">{updatedAt.split(' ').slice(0, 1)}</span>
-          {tags &&
-            tags.map((t: string) => (
-              <span key={t} className="mx-1 text-xs text-zinc-500">
-                <span className="mr-[1px]">#</span>
-                {t}
-              </span>
-            ))}
-        </div>
-      </a>
-    </NextLink>
-  </React.Fragment>
+  <Link
+    href={href}
+    className="w-full rounded-md p-2 px-3 transition-all hover:bg-zinc-100 dark:hover:bg-zinc-900"
+  >
+    <span className="block">{children}</span>
+    <div className="mt-1 flex flex-wrap">
+      <span className="mr-2 text-xs text-zinc-400">{updatedAt.split(' ').slice(0, 1)}</span>
+      {tags &&
+        tags.map((t: string) => (
+          <span key={t} className="mx-1 text-xs text-zinc-500">
+            <span className="mr-[1px]">#</span>
+            {t}
+          </span>
+        ))}
+    </div>
+  </Link>
 );
 
-interface HomeProps {
-  postsByYear: PostsByYear;
-}
-const Home = ({ postsByYear }: HomeProps) => {
+// interface HomeProps {
+//   postsByYear: PostsByYear;
+// }
+const Home = () => {
+  const postsByYear = {};
   return (
     <React.Fragment>
-      <Head>
-        <title>Mads Nedergaard</title>
-        <meta name="description" content="Personal website of Mads Nedergaard, software engineer" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="container mx-auto flex  flex-col items-center space-y-10  pt-10 pb-10 dark:text-white sm:pt-20">
+      <main className="container mx-auto flex  flex-col items-center space-y-10  pb-10 pt-10 sm:pt-20 dark:text-white">
         <section className="flex flex-col text-center">
           <p className="text-3xl sm:text-5xl">🛠</p>
           <h1 className="my-4 text-4xl font-bold sm:text-6xl">Mads Nedergaard</h1>
-          <p className="mb-1 animate-rainbow-text bg-gradient-to-r from-[#3494E6] via-[#5961DF] to-[#EC6EAD] bg-clip-text text-xl text-transparent dark:via-[#fcff9e] dark:to-[#EC6EAD] sm:text-2xl">
+          <p className="mb-1 animate-rainbow-text bg-gradient-to-r from-[#3494E6] via-[#5961DF] to-[#EC6EAD] bg-clip-text text-xl text-transparent sm:text-2xl dark:via-[#fcff9e] dark:to-[#EC6EAD]">
             A craftsman of the internet
           </p>
           <p className="italic text-zinc-500">
@@ -99,25 +93,25 @@ const Home = ({ postsByYear }: HomeProps) => {
   );
 };
 
-type PostsByYear = { [key: string]: PostWithSlug[] };
-export const getStaticProps: GetStaticProps<{ postsByYear: PostsByYear }> = () => {
-  const posts = getPosts();
+// type PostsByYear = { [key: string]: PostWithSlug[] };
+// export const getStaticProps: GetStaticProps<{ postsByYear: PostsByYear }> = async () => {
+//   const posts = await getPosts();
 
-  // Group posts by year
-  const postsByYear = posts.reduce((acc, post) => {
-    const year = new Date(post.data.createdAt).getFullYear();
-    if (!acc[year]) {
-      acc[year] = [];
-    }
-    acc[year].push(post);
-    return acc;
-  }, {} as PostsByYear);
+//   // Group posts by year
+//   const postsByYear = posts.reduce((acc, post) => {
+//     const year = new Date(post.data.createdAt).getFullYear();
+//     if (!acc[year]) {
+//       acc[year] = [];
+//     }
+//     acc[year].push(post);
+//     return acc;
+//   }, {} as PostsByYear);
 
-  return {
-    props: {
-      postsByYear: postsByYear,
-    },
-  };
-};
+//   return {
+//     props: {
+//       postsByYear: postsByYear,
+//     },
+//   };
+// };
 
 export default Home;
