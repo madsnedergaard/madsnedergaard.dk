@@ -2,13 +2,19 @@
 
 Hi there 👋
 
-This is my personal website. And this time it will be different, I will **definitely** not spend all the time setting up a cool blog to then never use it!
+This is my personal website. And this time it will be different, I will **definitely** not spend all the time setting up a cool blog to then never write any content! 😅
 
 ### Tech stack
 
-_The stack and this site is all about trying new things, so most of these should be something I haven't used before!_
+_The stack and this site is all about trying new things, so bonus for things I haven't used before!_
 
-- NextJS (TS)
-- TailwindCSS
-- Zustand (overkill, but I want to try it)
-- TBD
+- Latest NextJS with App Router
+- TailwindCSS v4
+- TypeScript
+- Vercel
+- MDX for blog posts
+- Eslint 9, but I want to try https://oxc.rs/docs/guide/usage/linter soon
+
+### Inspiration
+
+https://www.joshwcomeau.com/blog/how-i-built-my-blog-v2/
