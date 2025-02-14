@@ -1,5 +1,23 @@
 @import 'tailwindcss';
 
+@plugin '@tailwindcss/typography';
+
+@theme {
+  --animate-rainbow-text: rainbow-text 3s ease infinite;
+
+  @keyframes rainbow-text {
+    0%,
+    100% {
+      background-size: 200% 200%;
+      background-position: left center;
+    }
+    50% {
+      background-size: 200% 200%;
+      background-position: right center;
+    }
+  }
+}
+
 html,
 body {
   padding: 0;
