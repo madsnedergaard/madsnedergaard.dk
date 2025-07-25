@@ -3,6 +3,7 @@
 @plugin '@tailwindcss/typography';
 
 @theme {
+  --color-primary: #5961df;
   --animate-rainbow-text: rainbow-text 3s ease infinite;
 
   @keyframes rainbow-text {
