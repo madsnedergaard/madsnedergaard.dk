@@ -1,5 +1,4 @@
 import NavLink from './NavLink';
-import cx from 'classnames';
 
 export default function Header() {
   return (
