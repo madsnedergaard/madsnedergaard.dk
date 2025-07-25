@@ -15,7 +15,7 @@ const PostLink = ({ children, updatedAt, tags, href }: LinkProps) => (
     href={href}
     className="w-full rounded-md p-2 px-3 transition-all hover:bg-zinc-100 dark:hover:bg-zinc-900"
   >
-    <span className="block">{children}</span>
+    <span className="block">{children.replace('\\n', '')}</span>
     <div className="mt-1 flex flex-wrap">
       <span className="mr-2 text-xs text-zinc-400">{updatedAt.split(' ').slice(0, 1)}</span>
       {tags &&
@@ -91,7 +91,7 @@ const Home = async () => {
                             updatedAt={p.updatedAt}
                             tags={p.tags}
                           >
-                            {p.title}
+                            {p.title.replace('\\n', '')}
                           </PostLink>
                         ))}
                       </div>

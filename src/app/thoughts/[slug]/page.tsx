@@ -55,7 +55,7 @@ export async function generateMetadata({
 
   const post = await getPostBySlug(slug);
   return {
-    title: post?.title || 'Blog Post',
+    title: post?.title.replace('\\n', '') || 'Blog Post',
     description: 'Blog post by Mads Nedergaard',
   };
 }
