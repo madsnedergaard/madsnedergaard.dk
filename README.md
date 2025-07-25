@@ -13,7 +13,7 @@ _The stack and this site is all about trying new things, so bonus for things I h
 - TypeScript
 - Vercel
 - MDX for blog posts
-- Eslint 9, but I want to try https://oxc.rs/docs/guide/usage/linter soon
+- OXlint
 
 ### Inspiration
 
