@@ -16,6 +16,7 @@
     "@mdx-js/loader": "^3.1.0",
     "@next/mdx": "^15.3.5",
     "@tailwindcss/postcss": "^4.0.0",
+    "@tailwindcss/typography": "^0.5.16",
     "@types/mdx": "^2.0.13",
     "@vercel/blob": "^1.1.1",
     "clsx": "^2.1.1",
