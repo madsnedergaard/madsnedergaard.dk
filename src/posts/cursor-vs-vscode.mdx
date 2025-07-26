@@ -1,0 +1,77 @@
+---
+title: 'I left Cursor for VSCode\n — but soon returned'
+createdAt: 'July 2025'
+updatedAt: 'July 2025'
+tags: ['software']
+---
+
+import { Video } from '@/components/VideoEmbed';
+import { TLDR } from '@/components/Callout';
+
+<TLDR>
+  Cursor is still (as of July 2025) superior to VSCode for AI-assisted coding. Compare the videos
+  below to see how autocomplete is so much nicer in Cursor.
+</TLDR>
+
+## Context
+
+I'm a software engineer with 10 YoE, and I've been happily using [Cursor](https://www.cursor.com/)
+since Fall 2024, but given the recent pricing outrage I decided it was time to give VSCode another
+chance.
+
+I switched to [VSCode Insiders](https://code.visualstudio.com/insiders/) (_as it supposedly has
+better AI support_) + [Traycer](https://traycer.ai/) for a week - which was long enough to realise
+that Cursor is still ahead of the game!
+
+## Why Cursor is better
+
+Chat-wise VSCode is fine, but what killed me is how far behind autocomplete is. And autocomplete is
+where AI in coding shines in my opinion, as it really boost productivity and avoids the small
+tedious tasks that adds up.
+
+- Copilot in VSCode did not work well when editing across files (it feels like it does not have
+  context of changes made between different files),
+- the suggestions were more often incorrect (despite clear types from TypeScript) and
+- in general it felt much more sluggish and slow when coming from Cursor.
+
+## And here's the proof
+
+This small and somewhat trivial refactor clearly shows the difference. With Cursor the same task
+took me half the time compared to VSCode.
+
+Setup:
+
+1. I renamed a function and changed the signature slightly in one file.
+2. In another file that imports the function, I update the usage.
+
+### Cursor
+
+- It took me **30 seconds** to complete the task
+- It instantly knew what the new function was named and suggested replacing it
+- It instantly knew that the types had changed and suggested updating usage to match the new type
+
+<Video title="Cursor in action" fileName="cursor-being-great.mp4" width={640} height={700} />
+
+### VSCode/Copilot
+
+- It took me **67 seconds** to complete the task
+- VSCode did not suggest renaming the function or import
+- VSCode insisted on using the outdated function signature
+- I had to manually click on a line before autocomplete started showing suggestions
+
+<Video title="VSCode in action" fileName="copilot-being-crap.mp4" width={640} height={709} />
+
+---
+
+So in conclusion, I'm back to Cursor.
+
+I have dabbled with Gemini CLI and Claude Code, but I prefer writing code (with assistance) over
+writing prompts (and I rarely get great results for complex tasks anyway, but I guess that's because
+I'm not using that one magical prompt that makes everything great).
+
+### Tell me why I'm wrong
+
+There's probably a hundred reasons why you believe this is all my own fault, how I missed something
+obvious or why I should buy your course on prompt engineering. Except for the last one, I'd
+genuinely like to hear them! Ping me on [BlueSky](https://bsky.app/profile/madsnedergaard.dk) and
+tell me if you have a different experience.
