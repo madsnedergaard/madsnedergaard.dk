@@ -1,0 +1,21 @@
+---
+title: 'Fixing empty NextJS CSS on production builds'
+createdAt: 'July 2025'
+---
+
+This is a weird one, but while redesigning this page and upgrading to Tailwind 4 + NextJS 15, I had
+an issue where the CSS was empty on production builds.
+
+It works fine with both local dev-mode and when building locally.
+
+### Solution
+
+This is a hacky workaround, but it works ¯\\\_(ツ)\_/¯
+
+1. Create an empty CSS file: `touch dummy.css`
+2. Import it at the top of the `globals.css` file:
+
+```css
+@import './dummy.css';
+@import 'tailwindcss';
+```
