@@ -51,7 +51,7 @@ const Home = async () => {
               Mads Nedergaard
             </h1>
             <p className="text-zinc-500 italic">
-              &ndash; and his collection of thoughts on all things software
+              &mdash; and a collection of thoughts on all things software
             </p>
             <svg
               className="mx-auto mt-6 mb-8 h-4 w-80 text-zinc-500 dark:text-zinc-700"
@@ -73,7 +73,7 @@ const Home = async () => {
               Object.keys(postsByYear).length < 1 ? 'hidden' : ''
             }`}
           >
-            <div className="flex flex-col space-y-2 pt-2">
+            <div className="mx-4 flex flex-col space-y-2 pt-2 sm:mx-2">
               {Object.entries(postsByYear)
                 .sort(([a], [b]) => Number(b) - Number(a))
                 .map(([year, posts]) => (

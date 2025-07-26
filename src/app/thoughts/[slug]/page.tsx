@@ -16,7 +16,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     return (
       <div>
         <Header />
-        <article className="prose prose-zinc dark:prose-invert container mx-auto px-2 pb-8">
+        <article className="prose prose-zinc dark:prose-invert container mx-auto px-4 pb-8 sm:px-2">
           <PostIntro data={meta} />
           <svg
             className="mx-auto mt-6 mb-8 h-4 w-80 text-zinc-500 dark:text-zinc-700"
