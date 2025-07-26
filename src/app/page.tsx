@@ -6,18 +6,18 @@ import NavLink from '@/components/NavLink';
 
 interface LinkProps {
   children: string;
-  updatedAt: string;
+  postDate: string;
   tags?: string[];
   href: string;
 }
-const PostLink = ({ children, updatedAt, tags, href }: LinkProps) => (
+const PostLink = ({ children, postDate, tags, href }: LinkProps) => (
   <Link
     href={href}
     className="w-full rounded-md p-2 px-3 transition-all hover:bg-zinc-100 dark:hover:bg-zinc-900"
   >
     <span className="block">{children.replace('\\n', '')}</span>
     <div className="mt-1 flex flex-wrap">
-      <span className="mr-2 text-xs text-zinc-400">{updatedAt.split(' ').slice(0, 1)}</span>
+      <span className="mr-2 text-xs text-zinc-400">{postDate.split(' ').slice(0, 1)}</span>
       {tags &&
         tags.map((t: string) => (
           <span key={t} className="mx-1 text-xs text-zinc-500">
@@ -88,7 +88,7 @@ const Home = async () => {
                           <PostLink
                             key={p.slug}
                             href={`/thoughts/${p.slug}`}
-                            updatedAt={p.updatedAt}
+                            postDate={p.createdAt}
                             tags={p.tags}
                           >
                             {p.title.replace('\\n', '')}

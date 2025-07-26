@@ -6,7 +6,7 @@ export const PostIntro = ({ data }: { data: PostMeta }) => (
       className="m-4 mb-3 text-3xl font-bold sm:mt-12 sm:text-4xl"
       dangerouslySetInnerHTML={{ __html: data.title.replace('\\n', '<br />') }}
     ></h1>
-    <time className="text-zinc-500 italic">Updated {data.updatedAt}</time>
+    <p className="text-zinc-500 italic">{data.updatedAt || data.createdAt}</p>
     <div>
       <div className="text-md mt-2 flex flex-col items-center justify-center space-x-2 sm:flex-row sm:text-sm">
         {data.readingTime} min read
