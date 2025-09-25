@@ -39,10 +39,46 @@ export async function getPosts(): Promise<PostMeta[]> {
       })
   );
 
-  // Sort posts by updatedAt date
+  // Helper function to parse "Month YYYY" format to Date
+  const parseCreatedAt = (dateStr: string): Date => {
+    if (!dateStr) return new Date(0); // fallback for empty dates
+
+    // Handle "Month YYYY" format
+    const parts = dateStr.trim().split(' ');
+    if (parts.length === 2) {
+      const month = parts[0];
+      const year = parseInt(parts[1]);
+
+      const monthMap: { [key: string]: number } = {
+        January: 0,
+        February: 1,
+        March: 2,
+        April: 3,
+        May: 4,
+        June: 5,
+        July: 6,
+        August: 7,
+        September: 8,
+        October: 9,
+        November: 10,
+        December: 11,
+      };
+
+      const monthIndex = monthMap[month];
+      if (monthIndex !== undefined && !isNaN(year)) {
+        return new Date(year, monthIndex, 1);
+      }
+    }
+
+    // Fallback to standard Date parsing
+    const parsed = new Date(dateStr);
+    return isNaN(parsed.getTime()) ? new Date(0) : parsed;
+  };
+
+  // Sort posts by createdAt date
   return posts.sort((a, b) => {
-    const dateA = new Date(a.updatedAt);
-    const dateB = new Date(b.updatedAt);
+    const dateA = parseCreatedAt(a.createdAt);
+    const dateB = parseCreatedAt(b.createdAt);
     return dateB.getTime() - dateA.getTime();
   });
 }
