@@ -33,8 +33,46 @@ type PostsByYear = { [key: string]: PostMeta[] };
 
 const Home = async () => {
   const posts = await getPosts();
+
+  // Helper function to parse "Month YYYY" format to Date
+  const parseCreatedAt = (dateStr: string): Date => {
+    if (!dateStr) return new Date(0); // fallback for empty dates
+
+    // Handle "Month YYYY" format
+    const parts = dateStr.trim().split(' ');
+    if (parts.length === 2) {
+      const month = parts[0];
+      const year = parseInt(parts[1]);
+
+      const monthMap: { [key: string]: number } = {
+        January: 0,
+        February: 1,
+        March: 2,
+        April: 3,
+        May: 4,
+        June: 5,
+        July: 6,
+        August: 7,
+        September: 8,
+        October: 9,
+        November: 10,
+        December: 11,
+      };
+
+      const monthIndex = monthMap[month];
+      if (monthIndex !== undefined && !isNaN(year)) {
+        return new Date(year, monthIndex, 1);
+      }
+    }
+
+    // Fallback to standard Date parsing
+    const parsed = new Date(dateStr);
+    return isNaN(parsed.getTime()) ? new Date(0) : parsed;
+  };
+
   const postsByYear = posts.reduce((acc, post) => {
-    const year = new Date(post.createdAt).getFullYear();
+    const date = parseCreatedAt(post.createdAt);
+    const year = date.getFullYear();
     if (!acc[year]) {
       acc[year] = [];
     }
@@ -84,16 +122,22 @@ const Home = async () => {
                         <div className="ml-1/2 mt-1 h-full w-[1px] bg-zinc-700" />
                       </div>
                       <div className="flex w-full flex-col">
-                        {posts.map((p) => (
-                          <PostLink
-                            key={p.slug}
-                            href={`/thoughts/${p.slug}`}
-                            postDate={p.createdAt}
-                            tags={p.tags}
-                          >
-                            {p.title.replace('\\n', '')}
-                          </PostLink>
-                        ))}
+                        {posts
+                          .sort((a, b) => {
+                            const dateA = parseCreatedAt(a.createdAt);
+                            const dateB = parseCreatedAt(b.createdAt);
+                            return dateB.getTime() - dateA.getTime();
+                          })
+                          .map((p) => (
+                            <PostLink
+                              key={p.slug}
+                              href={`/thoughts/${p.slug}`}
+                              postDate={p.createdAt}
+                              tags={p.tags}
+                            >
+                              {p.title.replace('\\n', '')}
+                            </PostLink>
+                          ))}
                       </div>
                     </div>
                   </div>
