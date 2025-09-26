@@ -1,3 +1,4 @@
+import { cn } from '@/utils/cn';
 import type { MDXComponents } from 'mdx/types';
 import Image, { ImageProps } from 'next/image';
 
@@ -15,9 +16,25 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {children}
       </a>
     ),
-    img: (props) => (
-      <Image sizes="100vw" style={{ width: '100%', height: 'auto' }} {...(props as ImageProps)} />
-    ),
+    img: (props) => {
+      const { title, ...imageProps } = props;
+      return (
+        <span className="mb-4">
+          <Image
+            sizes="100vw"
+            style={{ width: '100%', height: 'auto' }}
+            className={cn(
+              'rounded-md border-2 border-zinc-400/50 shadow-md dark:border-zinc-600/20',
+              title && 'mb-2'
+            )}
+            {...(imageProps as ImageProps)}
+          />
+          {title && (
+            <span className="flex justify-center text-sm text-zinc-500 italic">{title}</span>
+          )}
+        </span>
+      );
+    },
     ...components,
   };
 }

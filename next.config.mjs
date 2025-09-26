@@ -3,12 +3,13 @@ import remarkGfm from 'remark-gfm';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 import rehypePrettyCode from 'rehype-pretty-code';
+import rehypeMdxImportMedia from 'rehype-mdx-import-media';
 
 const withMDX = createMDX({
   extension: /\.(md|mdx)$/,
   options: {
     remarkPlugins: [remarkGfm, remarkFrontmatter, remarkMdxFrontmatter],
-    rehypePlugins: [rehypePrettyCode],
+    rehypePlugins: [rehypePrettyCode, rehypeMdxImportMedia],
   },
 });
 
