@@ -1,0 +1,52 @@
+---
+title: 'Debugging full-stack Remix in Cursor & VSCode'
+createdAt: '26/09/2025'
+tags: ['DevExperience']
+---
+
+This is how to get a great debugging setup with Remix that supports both server-side and client-side
+debugging in your editor.
+
+## Workflow
+
+1. open project in your editor
+2. Run "start debugging" (shortcut or via command panel)
+
+And that's it! You now have a dev server running in editor terminal and Chrome launching a window
+for running the app. Now you can add breakpoints and figure out why that pesky bug is happening!
+
+![Example of server-side breakpoint](../../public/debugging-server-side.png 'using a breakpoint in a Remix loader()')
+
+![Example of client-side breakpoint](../../public/debugging-client-side.png 'using a breakpoint in a Remix component')
+
+## Setting it up
+
+Just add this launch configuration
+([inspired by NextJS](https://nextjs.org/docs/app/guides/debugging)) as `./vscode/launch.json` in
+the root of your project:
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Remix: debug full stack",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/server.mjs",
+      "runtimeArgs": ["--inspect"],
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "serverReadyAction": {
+        "action": "debugWithChrome",
+        "killOnServerStop": true,
+        "pattern": "Express server listening at (https?://.+)",
+        "uriFormat": "%s",
+        "webRoot": "${workspaceFolder}/app"
+      },
+      "env": {
+        "NODE_ENV": "development"
+      }
+    }
+  ]
+}
+```
