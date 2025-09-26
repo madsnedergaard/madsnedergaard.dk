@@ -6,7 +6,7 @@ import NavLink from '@/components/NavLink';
 
 interface LinkProps {
   children: string;
-  postDate: string;
+  postDate: Date;
   tags?: string[];
   href: string;
 }
@@ -17,7 +17,9 @@ const PostLink = ({ children, postDate, tags, href }: LinkProps) => (
   >
     <span className="block">{children.replace('\\n', '')}</span>
     <div className="mt-1 flex flex-wrap">
-      <span className="mr-2 text-xs text-zinc-400">{postDate.split(' ').slice(0, 1)}</span>
+      <span className="mr-2 text-xs text-zinc-400">
+        {postDate.toLocaleDateString('en-GB', { month: 'long', day: '2-digit' })}
+      </span>
       {tags &&
         tags.map((t: string) => (
           <span key={t} className="mx-1 text-xs text-zinc-500">
@@ -34,34 +36,18 @@ type PostsByYear = { [key: string]: PostMeta[] };
 const Home = async () => {
   const posts = await getPosts();
 
-  // Helper function to parse "Month YYYY" format to Date
+  // Helper function to parse date string to Date
   const parseCreatedAt = (dateStr: string): Date => {
     if (!dateStr) return new Date(0); // fallback for empty dates
 
-    // Handle "Month YYYY" format
-    const parts = dateStr.trim().split(' ');
-    if (parts.length === 2) {
-      const month = parts[0];
-      const year = parseInt(parts[1]);
+    const parts = dateStr.trim().split('/').map(Number);
 
-      const monthMap: { [key: string]: number } = {
-        January: 0,
-        February: 1,
-        March: 2,
-        April: 3,
-        May: 4,
-        June: 5,
-        July: 6,
-        August: 7,
-        September: 8,
-        October: 9,
-        November: 10,
-        December: 11,
-      };
+    // Handle "DD/Month/YYYY" format (e.g., "26/07/2025")
+    if (parts.length === 3) {
+      const [day, month, year] = parts;
 
-      const monthIndex = monthMap[month];
-      if (monthIndex !== undefined && !isNaN(year)) {
-        return new Date(year, monthIndex, 1);
+      if (!isNaN(year) && !isNaN(day) && !isNaN(month)) {
+        return new Date(year, month - 1, day);
       }
     }
 
@@ -132,7 +118,7 @@ const Home = async () => {
                             <PostLink
                               key={p.slug}
                               href={`/thoughts/${p.slug}`}
-                              postDate={p.createdAt}
+                              postDate={parseCreatedAt(p.createdAt)}
                               tags={p.tags}
                             >
                               {p.title.replace('\\n', '')}
