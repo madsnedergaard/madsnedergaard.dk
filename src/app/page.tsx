@@ -131,7 +131,7 @@ const Home = async () => {
             </div>
           </div>
         </section>
-        <footer className="space-x-4">
+        <footer className="space-x-4 pb-4">
           <NavLink href="https://bsky.app/profile/madsnedergaard.dk">BlueSky</NavLink>
           <NavLink href="https://github.com/madsnedergaard">Github</NavLink>
           <NavLink href="https://linkedin.com/in/madsnedergaard">LinkedIn</NavLink>

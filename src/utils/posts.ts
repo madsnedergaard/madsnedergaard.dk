@@ -9,6 +9,7 @@ export interface PostMeta {
   tags?: string[];
   readingTime: number;
   slug: string;
+  feedbackDisabled?: boolean;
 }
 
 export type Post = PostMeta & { content: string; parsedContent: any };
@@ -33,7 +34,7 @@ export async function getPosts(): Promise<PostMeta[]> {
           updatedAt: data.updatedAt || '',
           tags: data.tags || [],
           slug: slug,
-          // data: data,
+          feedbackDisabled: data.feedbackDisabled || false,
           readingTime: Math.max(1, Math.round(content.split(/\s+/).length / 200)),
         };
       })
@@ -97,6 +98,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
       tags: data.tags || [],
       slug: slug,
       content,
+      feedbackDisabled: data.feedbackDisabled || false,
       parsedContent: parsedContent.default,
     };
   } catch {
