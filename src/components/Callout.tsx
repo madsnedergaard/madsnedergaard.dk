@@ -1,6 +1,8 @@
 import { BookOpenTextIcon, FlagIcon } from 'lucide-react';
 import { cn } from '@/utils/cn';
 
+type Size = 'sm' | 'md';
+
 const variantClasses = {
   primary: {
     wrapper: 'border-primary',
@@ -19,23 +21,36 @@ const variantClasses = {
   },
 } as const;
 
+const sizeClasses = {
+  sm: {
+    text: 'sm:text-sm',
+  },
+  md: {
+    text: 'sm:text-lg',
+  },
+} as const;
+
 const Callout = ({
   title,
   icon,
   color,
   children,
+  size = 'md',
 }: {
   title?: string;
   icon: React.ReactNode;
   color: keyof typeof variantClasses;
   children: React.ReactNode;
+  size?: Size;
 }) => {
   const variantClass = variantClasses[color];
+  const sizeClass = sizeClasses[size];
 
   return (
     <div
       className={cn(
         'mx-6 border-b-2 py-2 sm:mx-0 sm:border-b-0 sm:border-l-4 sm:px-6',
+
         variantClass.wrapper
       )}
     >
@@ -50,7 +65,11 @@ const Callout = ({
         </div>
       )}
       <div
-        className={cn('text-zinc-600 sm:text-lg dark:text-zinc-400 [&>p]:m-0', variantClass.text)}
+        className={cn(
+          'text-zinc-600 dark:text-zinc-400 [&>p]:m-0',
+          variantClass.text,
+          sizeClass.text
+        )}
       >
         {children}
       </div>
@@ -58,8 +77,13 @@ const Callout = ({
   );
 };
 
-export const TLDR = ({ children }: { children: React.ReactNode }) => (
-  <Callout title="tl;dr" icon={<BookOpenTextIcon size={18} strokeWidth={2} />} color="primary">
+export const TLDR = ({ size, children }: { size: Size; children: React.ReactNode }) => (
+  <Callout
+    title="tl;dr"
+    icon={<BookOpenTextIcon size={18} strokeWidth={2} />}
+    color="primary"
+    size={size}
+  >
     {children}
   </Callout>
 );
