@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import * as path from 'node:path';
 import matter from 'gray-matter';
+import type { Toc } from '@stefanprobst/rehype-extract-toc';
 
 export interface PostMeta {
   title: string;
@@ -10,6 +11,7 @@ export interface PostMeta {
   readingTime: number;
   slug: string;
   feedbackDisabled?: boolean;
+  toc?: Toc;
 }
 
 export type Post = PostMeta & { content: string; parsedContent: any };
@@ -100,6 +102,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
       content,
       feedbackDisabled: data.feedbackDisabled || false,
       parsedContent: parsedContent.default,
+      toc: parsedContent.tableOfContents,
     };
   } catch {
     return null;
