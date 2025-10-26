@@ -9,22 +9,26 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h3: ({ children }) => <h3 className="mb-2 text-xl font-semibold">{children}</h3>,
     p: ({ children }) => <p className="mb-4">{children}</p>,
     a: ({ children, href }) => (
+      // oxlint-disable-next-line no-html-link-for-pages
       <a
         href={href}
-        className="hover:text-primary underline-offset-2 transition-all hover:underline-offset-4"
+        className="hover:text-primary underline-offset-3 transition-all hover:underline-offset-4 dark:text-[#a3a7dd]"
       >
         {children}
       </a>
     ),
     img: (props) => {
       const { title, ...imageProps } = props;
+      // @ts-expect-error - src is not typed correctly
+      const isSvg = imageProps.src?.src?.includes('.svg');
       return (
         <span className="mb-4">
           <Image
             sizes="100vw"
             style={{ width: '100%', height: 'auto' }}
             className={cn(
-              'rounded-md border-2 border-zinc-400/50 shadow-md dark:border-zinc-600/20',
+              'rounded-md border-zinc-400/50 dark:border-zinc-600/20',
+              isSvg ? '' : 'border-2 shadow-md',
               title && 'mb-2'
             )}
             {...(imageProps as ImageProps)}
