@@ -65,7 +65,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                 href={`mailto:feedback@madsnedergaard.dk?subject=${emailSubject}`}
                 className="group border-b border-zinc-500 transition-all hover:border-zinc-50 hover:pb-1 dark:hover:border-zinc-800"
               >
-                <span className="animate-rainbow-text from-[#3494E6] via-[#5961DF] to-[#EC6EAD] bg-clip-text italic group-hover:bg-gradient-to-r group-hover:text-transparent dark:via-[#fcff9e] dark:to-[#EC6EAD]">
+                <span className="animate-rainbow-text dark:via-secondary from-[#3494E6] via-[#5961DF] to-[#EC6EAD] bg-clip-text italic group-hover:bg-gradient-to-r group-hover:text-transparent dark:to-[#EC6EAD]">
                   shoot me an email
                 </span>
               </a>{' '}

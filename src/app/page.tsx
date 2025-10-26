@@ -71,7 +71,7 @@ const Home = async () => {
       <main className="container mx-auto flex h-full flex-col items-center justify-between pt-4 pb-10 sm:pt-8 dark:text-white">
         <section>
           <header className="flex flex-col items-center text-center">
-            <h1 className="animate-rainbow-text my-4 mb-1 bg-gradient-to-r from-[#3494E6] via-[#5961DF] to-[#EC6EAD] bg-clip-text pb-1 text-4xl font-bold text-transparent sm:text-6xl dark:via-[#fcff9e] dark:to-[#EC6EAD]">
+            <h1 className="animate-rainbow-text to-pink my-4 mb-1 bg-gradient-to-r from-[#3494E6] via-[#5961DF] bg-clip-text pb-1 text-4xl font-bold text-transparent sm:text-6xl dark:via-[#fcff9e]">
               Mads Nedergaard
             </h1>
             <p className="text-zinc-500 italic">
