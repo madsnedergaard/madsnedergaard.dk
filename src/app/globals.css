@@ -6,6 +6,8 @@
 
 @theme {
   --color-primary: #5961df;
+  --color-pink: #ec6ead;
+  --color-yellow: #fcff9e; /* TODO: what about light mode? */
   --animate-rainbow-text: rainbow-text 3s ease infinite;
 
   @keyframes rainbow-text {
