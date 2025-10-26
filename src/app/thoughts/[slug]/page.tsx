@@ -4,6 +4,51 @@ import { getPostBySlug, getPosts } from '@/utils/posts';
 import Header from '@/components/Header';
 import { PostIntro } from '@/components/PostIntro';
 import { Metadata } from 'next';
+import { Toc } from '@stefanprobst/rehype-extract-toc';
+import Link from 'next/link';
+
+const TableOfContents = ({ title, items }: { title: string; items: Toc }) => {
+  return (
+    <div className="sticky top-24">
+      <div className="mb-4">
+        <h3 className="text-xs font-medium tracking-wide text-zinc-500 uppercase dark:text-zinc-400">
+          Table of Contents
+        </h3>
+        <p className="mt-1 mb-0 line-clamp-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
+          {title}
+        </p>
+      </div>
+      <nav>
+        <ul className="mt-0 list-none space-y-1.5 ps-0">
+          {items.map((item) => (
+            <li key={item.id}>
+              <Link
+                href={`#${item.id}`}
+                className="block text-sm font-normal text-zinc-500 decoration-black/20 transition-colors hover:text-zinc-900 hover:decoration-black/50 dark:text-zinc-400 dark:decoration-white/20 dark:hover:text-zinc-100"
+              >
+                {item.value}
+              </Link>
+              {item.children && (
+                <ul className="list-none space-y-1.5 ps-0">
+                  {item.children.map((child) => (
+                    <li key={child.id}>
+                      <Link
+                        href={`#${child.id}`}
+                        className="block text-xs font-normal text-zinc-600 decoration-black/10 transition-colors hover:text-zinc-900 hover:underline hover:decoration-black/50 dark:text-zinc-400 dark:decoration-white/10 dark:hover:text-zinc-100"
+                      >
+                        {child.value}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  );
+};
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -12,7 +57,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     if (!post) {
       return notFound();
     }
-    const { parsedContent: Content, ...meta } = post;
+    const { parsedContent: Content, toc, ...meta } = post;
+
+    const showToc = toc && toc.length > 0 && meta.readingTime > 2;
+    console.log(showToc, toc, toc?.length, meta.readingTime);
 
     const emailSubject = `Feedback on ${post.title}`;
     const feedbackEnabled = meta.feedbackDisabled ? false : true;
@@ -36,7 +84,16 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
               fill="none"
             />
           </svg>
-          <Content />
+          <div className="flex max-w-screen gap-8">
+            <main className="mx-auto max-w-4xl flex-1">
+              <Content />
+            </main>
+            {showToc && (
+              <aside className="hidden w-64 flex-shrink-0 lg:block">
+                <TableOfContents title={meta.title} items={toc} />
+              </aside>
+            )}
+          </div>
         </article>
         {feedbackEnabled && (
           <footer className="mt-12 pb-8 text-center text-sm text-zinc-500">
