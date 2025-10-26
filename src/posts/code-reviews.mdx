@@ -1,0 +1,283 @@
+---
+title: 'My principles of code review'
+createdAt: '08/10/2025'
+---
+
+import { TLDR, Disclaimer, Subtle } from '@/components/Callout';
+
+<TLDR>
+1. Prioritise reviewing
+2. Approve optimistically
+3. Make reviewing painless
+4. Focus on the bigger picture
+5. Be kind, ask questions
+
+</TLDR>
+
+Over the years I've adopted and preached the following principles for code reviews in an attempt to
+make this infamous part of our daily work as software engineers more meaningful.
+
+There's plenty of great articles on
+[how to write good pull requests](https://www.skovhus.dev/blog/better-pull-requests) and
+[how to review](https://endler.dev/2025/how-to-review-code/), but these principles are more high
+level and focused on the overall strategy.
+
+The goal of the code review in my opinion is to teach and learn, create shared context and
+distribute knowledge, divide responsibility and ownership, reduce bugs - and then lastly to make the
+codebase clean.
+
+These principles aim for **high velocity** and for **getting things shipped** (and enjoying the
+process) over clean and perfect code.
+[Clean code should never be the goal](https://overreacted.io/goodbye-clean-code/). For early-stage
+startups, ensuring the perfect architecture and future-proofing abstractions doesn't matter if
+you're not making money...
+
+<Disclaimer>
+  Your mileage may vary, or you may work in an environment where a small mistake in your internal
+  dashboard can [break the
+  internet](https://blog.cloudflare.com/deep-dive-into-cloudflares-sept-12-dashboard-and-api-outage/).
+  These ideas are intended for the rest of us and especially in startups where we’d rather let a bug
+  loose once in a while than slow down all the engineering work.
+</Disclaimer>
+
+---
+
+## 1. Prioritise reviewing
+
+Always prioritise reviewing PRs and unblocking your colleagues. Reviewing PRs might be an
+interruption for you, but remember that someone is potentially blocked until you do 🚧
+
+If you cannot review immediately, let the author know - ideally by asking how urgent it is.
+
+Utilise tooling to make sure you know when your review is requested in real-time - using email for
+this is really not the best workflow (IMO).
+
+[Linear made this much easier](https://linear.app/changelog/2025-01-23-pull-request-reviews) this
+year (if your team is already using it), but otherwise there's tools like
+[Gitify](https://gitify.io/).
+
+![Example of Linear GitHub notification](../../public/linear-review-notification.png 'An example of a notification from Linear')
+
+Being good at reviewing fast generally means people will continue making small and bite-sized PRs -
+whereas slow reviews makes you bundle more stuff onto the same PR because you know your reviewer is
+going to take a long to time before reviewing, so you try to get more done at once or add new work
+to the PR.
+
+---
+
+## 2. Approve optimistically
+
+Only left some minor comments? Just **approve the PR ✅**
+
+You left feedback and that's great - now trust that your colleague will look into it and solve it in
+an appropriate way!
+
+Approve with a "after X is addressed" comment if something really matters to you, but always
+remember the bigger picture.
+
+Now you have unblocked the author and it allows them to address the comments and merge when they are
+ready, instead of requiring another round of reviewing with all the context switching, delays and so
+on that it requires for both of you.
+
+_This is probably controversial and requires seniority in the team_, but by not approving you're
+adding a significant time investment for both you and the author. Yes, you won't get to test or
+review their solution to the feedback - but if it's minor things like naming, styling or small
+refactors, is it really worth the extra time and effort for everyone involved?
+
+If you have ever tried getting a review only pointing out a typo and you had to wait hours before
+the reviewer got back to you to approve the PR, you know how silly this can feel 🫠
+
+<Disclaimer>
+  With that said, this principle has a lot of caveats and there's plenty of situations where this should not be the default
+  approach, such as:
+
+- If the feedback you left requires substantial work that should be reviewed, tested and discussed
+- If the PR is currently going to break things and it definitely cannot go out like this
+- If the PR has auto-merge enabled and you don't require resolved comments before merging
+- If you don't have automated tests and linting
+- If the author is junior and you don't trust them to test their work before merging
+
+</Disclaimer>
+
+In general though, I found that this principle helps the team **ship faster** by avoiding the extra
+roundtrip and it fosters **a culture of trust**.
+
+---
+
+## 3. Make reviewing painless
+
+Invest in the reviewing experience as it pays back in many ways.
+
+The hypothesis behind this principle is that:
+
+1. the easier it is to review a PR, the faster it will be reviewed
+2. the faster a PR is reviewed, the easier it is to make smaller PRs
+3. the smaller PRs are, the easier they are to review
+
+Or with a beautifully crafter illustration:
+
+![The loop of reviews](../../public/code-review-loop.svg 'The loop of reviews')
+
+There's many way to approach this, but in my experience the following are the most impactful ways.
+
+### 3.1. Preview environments
+
+A preview environment (aka. preview build) is a complete build of the work in your branch/PR, served
+so that a reviewer can access it without having to check out the branch and run things locally.
+
+![A GitHub deployment of a preview](../../public/code-review-preview-build.png 'An example of a GitHub deployment of a preview')
+
+It can be a website like https://preview-12e946---api-portal-staging-jfnx5klx2a-ew.a.run.app/
+(there's a cold start so be patient), a downloadable binary, or whatever makes sense in your
+context.
+
+The magic happens when this is automatically created and made available directly on the PR, so that
+a reviewer can very easily test your work.
+
+**How to do it**
+
+For websites, most modern hosting providers like CloudFlare, Vercel, Netlify, Fly.io and similar all
+make this part of their core offering. Alternatively, you can often stitch something together
+yourself: At Electricity Maps we recently used Cloud Run revisions with zero traffic + GitHub
+Deployments (via the GH API) to get it working as in the example above (happy to share more details
+if anyone cares).
+
+**Why it matters**
+
+If you have to stash your ongoing work, checkout a branch and spin up your local development
+environment just to test a PR, it's very easy to postpone reviewing. I've been guilty of that a lot
+of times! By making something testable in your browser (or similar), you make it significantly
+easier to review the code.
+
+### 3.2. Git Worktrees
+
+Git worktrees are pretty cool and probably still not commonly used feature (although it's
+[getting a revival for AI-based development](https://sgryt.com/posts/git-worktree-parallel-ai-development/)).
+
+In short, it allows you to have **multiple working directories from the same Git repository**
+without having to clone it every time.
+
+And for reviewing code, this is amazing - it means you can checkout a branch and test it WITHOUT
+having to stash your ongoing work!
+
+I usually have a `review` worktree that I always keep around and can easily use with an alias:
+
+```bash
+# setup first time (also make sure you have the GitHub CLI installed)
+git worktree add ../review
+alias review="cd ~/dev/work/review && gh pr checkout"
+
+# usage - alias + branch name
+review mn/api/migrate-to-oxlint
+```
+
+There's
+[a great guide here](https://phelipetls.github.io/posts/git-worktrees-are-great-for-code-reviews/)
+if you want a more detailed explanation.
+
+### 3.3. Automate the basics and make it fast
+
+This should hopefully be no surprise, but having basic checks in place for linting, typechecking and
+unit tests is a no-brainer so a reviewer doens't have to do those.
+
+What I want to highlight here is that you should **invest in making those fast** so that they are
+almost always done before a reviewer gets started. Early feedback is key and helps the author fix
+any issues before they switch context.
+
+How to do that is too context-specific, but don't be afraid to think outside of how your company
+normally works if needed - if the general CI system is too slow, consider alternative approaches
+specifically for your project/team to ensure early feedback. Sorry DevOps ¯\\\_(ツ)\_/¯
+
+### 3.4. Review your own 💩
+
+Review your own PR like you would review a PR from someone else:
+
+- Read the PR description and make sure it gives enough context
+- Read through all changes and make sure it all makes sense (and that you didn't accidentally commit
+  unrelated changes)
+- Add additional comments where needed
+
+In the age of AI, this becomes even more important - please don't ask your reviewer to clean up code
+your LLM generated, that job is for you.
+
+Remember: Your reviewer have dropped whatever they were working on to help unblock you, so make sure
+they don't have to spend that time on pointing out silly things you should have caught yourself.
+
+---
+
+## 4. Focus on the bigger picture
+
+Focus on what matters when giving reviews. You don't always have to point out all the nitpicks that
+really don't matter...
+
+- **Performance**
+
+  If it's ineligible, avoid the temptation to do premature theoretical optimisations. Don't waste
+  energy on shaving sub-milliseconds off a function that runs once.
+
+- **Abstractions**
+
+  If there is no urgent need for an abstraction, don't suggest it. Abstractions should solve real
+  problems and should be avoided unless they serve that purpose.
+
+  Not everything has to be reusable class after all.
+
+- **Smart code**
+
+  One long, unreadable line of code is not better than the extensive, but readable 10 lines with a
+  boring old for-loop.
+
+  ["Programs are meant to be read by humans and only incidentally for computers to execute"](https://www.goodreads.com/book/show/43713.Structure_and_Interpretation_of_Computer_Programs)
+  still holds true in 2025.
+
+- **Spend most energy on the happy path**
+
+  Don't ignore the edge cases and non-obvious paths, test those and make sure they work. But don't
+  spend all of your energy and time on optimising for the journey that only 1% of users will take.
+
+With that said, sometimes nitpicks are useful when:
+
+- They teach the author something they didn't know
+- When they prevent future problems or continuation of a bad pattern
+
+Ideally you have a culture where it's considered okay for the author to ignore them if they deem
+that's the best, in my world nitpicks are almost always optional.
+
+---
+
+## 5. Be kind, ask questions
+
+This should go without saying, but **always be kind to the human behind the screen!**
+
+Receiving code reviews (as well as being asked to give them) can be anxiety-inducing, especially
+early in career. Remember that text is a shitty communication form that doesn't capture emotion
+well, so always ensure your messages are clearly framed and stay constructive.
+
+The
+[Code Review Anxiety Workbook](https://developer-success-lab.gitbook.io/code-review-anxiety-workbook-1)
+is a great resource for diving more into this.
+
+Secondly, **ask questions instead of giving orders**:
+
+- Maybe things were done this way for a reason, and asking questions helps uncover that context
+- It is much easier to digest and receive a question than an order - it really helps lower barriers
+
+The
+[Socratic method in software engineering](https://avishekbhattacharya.wordpress.com/2024/05/02/socratic-method-in-software-engineering-a-philosophical-approach-to-communication/)
+works great for code reviews.
+
+As an example, "What is the purpose of this function?" or "Is there a reason why you did X here
+instead of Y?" gives better grounds for a fruitful discussion than "this approach X is bad, please
+do Y instead".
+
+In essence (how cliché), just treat people like you'd want to be treated 💚
+
+---
+
+My rambles end here, I appreciate you if you made it all the way down here! 🙏
+
+I should end by saying that _all of the above are my personal opinions based on my personal
+experiences_.
+
+Please [do reach out](mailto:feedback@madsnedergaard.dk) if you disagree or found any of the above
+helpful, I'd really love to engage in further discussions and hear thoughts from you :)
