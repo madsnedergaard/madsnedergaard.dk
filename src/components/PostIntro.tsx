@@ -10,18 +10,26 @@ export const PostIntro = ({ data }: { data: PostMeta }) => (
     ></h1>
 
     <div>
-      <div className="text-md mt-2 flex flex-col items-center justify-center space-x-4 text-zinc-400 sm:flex-row sm:text-sm dark:text-zinc-500">
-        <span>{data.readingTime} min read</span>
+      <div className="text-md mt-2 flex flex-col items-center justify-center space-x-3 text-zinc-400 sm:flex-row sm:text-sm dark:text-zinc-500">
+        {data.readingTime > 2 && (
+          <>
+            <span>{data.readingTime} min read</span>
+            <span className={`text-zinc-300`}>&middot;</span>
+          </>
+        )}
         <span>{data.updatedAt || data.createdAt}</span>
         {data.tags && data.tags.length > 0 && (
-          <div className="flex flex-wrap justify-center space-x-1">
-            {data.tags?.map((t: string) => (
-              <span key={t}>
-                <span className="mr-[1px] text-zinc-300 dark:text-zinc-600">#</span>
-                {t}
-              </span>
-            ))}
-          </div>
+          <>
+            <span className={`text-zinc-300`}>&middot;</span>
+            <div className="flex flex-wrap justify-center space-x-1">
+              {data.tags?.map((t: string) => (
+                <span key={t}>
+                  <span className="mr-[1px] text-zinc-300 dark:text-zinc-600">#</span>
+                  {t}
+                </span>
+              ))}
+            </div>
+          </>
         )}
       </div>
     </div>
