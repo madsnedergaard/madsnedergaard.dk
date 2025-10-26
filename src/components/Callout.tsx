@@ -8,8 +8,8 @@ const variantClasses = {
     text: '',
   },
   yellow: {
-    wrapper: 'border-yellow dark:border-pink',
-    title: 'text-yellow dark:text-pink',
+    wrapper: 'border-amber-200 dark:border-yellow',
+    title: 'text-amber-500 dark:text-yellow',
     text: '',
   },
   gray: {
