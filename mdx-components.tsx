@@ -1,12 +1,35 @@
 import { cn } from '@/utils/cn';
 import type { MDXComponents } from 'mdx/types';
 import Image, { ImageProps } from 'next/image';
+import Link from 'next/link';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    h1: ({ children }) => <h1 className="mb-4 text-3xl font-bold">{children}</h1>,
-    h2: ({ children }) => <h2 className="mb-3 text-2xl font-semibold">{children}</h2>,
-    h3: ({ children }) => <h3 className="mb-2 text-xl font-semibold">{children}</h3>,
+    h1: ({ id, children }) => (
+      <h1 id={id} className="mb-4 text-3xl font-bold">
+        {children}
+      </h1>
+    ),
+    h2: ({ id, children }) => (
+      <Link
+        href={`#${id}`}
+        className="decoration-transparent decoration-2 underline-offset-0 transition-all hover:decoration-black/20 hover:underline-offset-2 dark:hover:decoration-white/20"
+      >
+        <h2 id={id} className="mb-3 text-2xl font-semibold">
+          {children}
+        </h2>
+      </Link>
+    ),
+    h3: ({ id, children }) => (
+      <Link
+        href={`#${id}`}
+        className="decoration-transparent decoration-2 underline-offset-0 transition-all hover:decoration-black/20 hover:underline-offset-2 dark:hover:decoration-white/20"
+      >
+        <h3 id={id} className="mb-2 text-xl font-semibold">
+          {children}
+        </h3>
+      </Link>
+    ),
     p: ({ children }) => <p className="mb-4">{children}</p>,
     a: ({ children, href }) => (
       // oxlint-disable-next-line no-html-link-for-pages
