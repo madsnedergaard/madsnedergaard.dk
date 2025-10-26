@@ -3,6 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import { getPosts, PostMeta } from '../utils/posts';
 import NavLink from '@/components/NavLink';
+import { ChevronRightIcon } from 'lucide-react';
 
 interface LinkProps {
   children: string;
@@ -11,13 +12,17 @@ interface LinkProps {
   href: string;
 }
 const PostLink = ({ children, postDate, tags, href }: LinkProps) => (
-  <Link
-    href={href}
-    className="w-full rounded-md p-2 px-3 transition-all hover:bg-zinc-100 dark:hover:bg-zinc-900"
-  >
-    <span className="block">{children.replace('\\n', '')}</span>
+  <Link href={href} className="group relative w-full rounded-md p-2 px-3 transition-all">
+    <div className="flex items-center">
+      <span className="group-hover:text-primary decoration-primary/0 group-hover:decoration-primary/20 block underline underline-offset-8 transition-all group-hover:underline-offset-4">
+        {children.replace('\\n', '')}
+      </span>
+      <span className="text-primary -translate-x-4 scale-50 opacity-0 transition-all group-hover:translate-x-1 group-hover:scale-100 group-hover:opacity-100">
+        <ChevronRightIcon className="mt-0.5 h-4 w-4" />
+      </span>
+    </div>
     <div className="mt-1 flex flex-wrap">
-      <span className="mr-2 text-xs text-zinc-400">
+      <span className="mr-2 text-xs text-zinc-500">
         {postDate.toLocaleDateString('en-GB', { month: 'long', day: '2-digit' })}
       </span>
       {tags &&
