@@ -75,7 +75,7 @@ const Home = async () => {
     <React.Fragment>
       <main className="container mx-auto flex h-full flex-col items-center justify-between pt-4 pb-10 sm:pt-8 dark:text-white">
         <section>
-          <header className="flex flex-col items-center text-center">
+          <header className="mb-8 flex flex-col items-center text-center">
             <h1 className="animate-rainbow-text to-pink my-4 mb-1 bg-gradient-to-r from-[#3494E6] via-[#5961DF] bg-clip-text pb-1 text-4xl font-bold text-transparent sm:text-6xl dark:via-[#fcff9e]">
               Mads Nedergaard
             </h1>
@@ -83,7 +83,7 @@ const Home = async () => {
               &mdash; and a collection of thoughts on all things software
             </p>
             <svg
-              className="mx-auto mt-6 mb-8 h-4 w-80 text-zinc-500 dark:text-zinc-700"
+              className="mx-auto mt-6 mb-6 h-4 w-80 text-zinc-500 dark:text-zinc-700"
               viewBox="0 0 320 16"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -96,6 +96,17 @@ const Home = async () => {
                 fill="none"
               />
             </svg>
+            <div className="flex flex-row space-x-4">
+              <NavLink href="/">Thoughts</NavLink>
+              <NavLink href="/about">About me</NavLink>
+              {/* <NavLink href="/uses">Uses</NavLink> */}
+              <NavLink external href="https://github.com/madsnedergaard">
+                Github
+              </NavLink>
+              <NavLink external href="https://linkedin.com/in/madsnedergaard">
+                LinkedIn
+              </NavLink>
+            </div>
           </header>
           <div
             className={`flex max-w-lg flex-col ${
@@ -136,11 +147,6 @@ const Home = async () => {
             </div>
           </div>
         </section>
-        <footer className="space-x-4 pb-4">
-          <NavLink href="https://bsky.app/profile/madsnedergaard.dk">BlueSky</NavLink>
-          <NavLink href="https://github.com/madsnedergaard">Github</NavLink>
-          <NavLink href="https://linkedin.com/in/madsnedergaard">LinkedIn</NavLink>
-        </footer>
       </main>
     </React.Fragment>
   );
