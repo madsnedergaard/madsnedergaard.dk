@@ -49,7 +49,7 @@ export default async function Page() {
   return (
     <div>
       <Header />
-      <article className="prose prose-zinc dark:prose-invert mx-auto max-w-screen-lg px-4 pb-8 sm:px-2 lg:px-2">
+      <article className="prose prose-zinc dark:prose-invert mx-auto max-w-screen-lg px-8 pb-8 md:px-2 lg:px-2">
         <div className="text-center sm:mt-12">
           <h1 className="m-4 mb-3 text-3xl font-bold sm:text-4xl">About me</h1>
           <svg
