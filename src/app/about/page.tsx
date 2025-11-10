@@ -21,10 +21,20 @@ function Content() {
           </p>
           <ul>
             <li>{timeAtWork} years of coding professionally</li>
-            <li>I get high on solving real problems for real people</li>
-            <li>Early-stage-ish startups is my happy place 🏡</li>
+            <li>I get high on solving real problems for real people </li>
+            <li>Early-stage-ish startups is my happy place</li>
+            <li>
+              I have a bias towards action (so cliché, but I hate to create a ticket if I can fix it
+              immediately)
+            </li>
+            <li>
+              Swinging{' '}
+              <a href="https://charity.wtf/2017/05/11/the-engineer-manager-pendulum/">
+                the pendulum of IC/lead
+              </a>{' '}
+              roles, but I keep getting drawn back into the magic of code 🪄
+            </li>
           </ul>
-          <p>I have a bias towards action</p>
         </section>
         <section>
           <h2>private-me</h2>
