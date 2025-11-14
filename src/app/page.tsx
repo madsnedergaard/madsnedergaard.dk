@@ -97,15 +97,9 @@ const Home = async () => {
               />
             </svg>
             <div className="flex flex-row space-x-4">
-              <NavLink href="/">Thoughts</NavLink>
-              <NavLink href="/about">About me</NavLink>
+              {/* <NavLink href="/">Thoughts</NavLink> */}
+              <NavLink href="/about">About</NavLink>
               {/* <NavLink href="/uses">Uses</NavLink> */}
-              <NavLink external href="https://github.com/madsnedergaard">
-                Github
-              </NavLink>
-              <NavLink external href="https://linkedin.com/in/madsnedergaard">
-                LinkedIn
-              </NavLink>
             </div>
           </header>
           <div

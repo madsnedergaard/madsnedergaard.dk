@@ -19,7 +19,7 @@ export default function NavLink({
     <Link
       href={href}
       className={cn(
-        'flex gap-0.5 text-sm text-zinc-500 underline underline-offset-2 transition-all hover:text-zinc-800 hover:underline-offset-4 dark:hover:border-zinc-400 dark:hover:text-zinc-400',
+        'flex gap-0.5 text-sm text-zinc-500 underline decoration-zinc-300 underline-offset-[3px] transition-all hover:text-zinc-800 hover:decoration-zinc-500 hover:underline-offset-4 dark:decoration-zinc-600 dark:hover:border-zinc-400 dark:hover:text-zinc-400',
         className
       )}
     >
