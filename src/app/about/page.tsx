@@ -51,6 +51,8 @@ function Content() {
         <div className="flex flex-row space-x-4">
           <NavLink href="https://github.com/madsnedergaard">Github</NavLink>
           <NavLink href="https://linkedin.com/in/madsnedergaard">LinkedIn</NavLink>
+          <NavLink href="https://bsky.app/profile/madsnedergaard.dk">BlueSky</NavLink>
+
           <NavLink href="https://www.goodreads.com/user/show/16531967-mads-nedergaard">
             Goodreads
           </NavLink>
