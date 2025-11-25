@@ -1,0 +1,62 @@
+---
+title: 'Mitigating NPM vulnerabilities like Shai-Hulud'
+createdAt: '25/11/2025'
+---
+
+import { TLDR, Disclaimer, Subtle } from '@/components/Callout';
+
+<TLDR size="sm">
+  We ended up migrating to Bun to strengthen security as similar NPM vulnerabilities are bound to
+  happen. Also, blazing fast 🚀
+</TLDR>
+
+Like a lot of other developers, I opened up my laptop to this morning to
+[the disturbing news of Shai-Hulud malware compromising the entir NPM eco system](https://www.aikido.dev/blog/shai-hulud-strikes-again-hitting-zapier-ensdomains).
+
+Luckily, we had zero impact on our end, but these attacks are always a great opportunity to improve
+and ensure we stay safe in the future.
+
+### Instant mitigation
+
+1. Check if any of our engineers have been compromised:
+
+```bash
+for user in $(gh api orgs/electricitymaps/members --paginate | jq -r '.[] | .login'); do
+  echo "Checking $user"
+  gh repo list $user --source --json name,description --jq '.[] | select(.description | contains("Sha1-Hulud: The Second Coming")) | .name'
+done
+```
+
+2. Ask all engineers to not run `npm install` and stop all CI/CD pipelines until things are under
+   control
+
+### Long-term mitigation
+
+After ensuring that we were safe for now, we started looking into long-term solutions.
+
+Ideas:
+
+1. Block all lifecycle scripts - not ideal as we have cases where it's needed
+2. Pin all dependencies to a specific version - a lot of work and it means more manual work to stay
+   up to date
+3. Switch to a package manager with better security defaults
+
+At first I attempted to use
+[Lavamoat/allow-scripts](https://lavamoat.github.io/guides/allow-scripts/) to allow specific
+packages to run scripts, but it required too much work and the developer experience was suboptimal.
+
+So instead, we decided to migrate from NPM to Bun (but only as a package manager) as we then get:
+
+- [`trustedDependencies`](https://bun.com/docs/pm/cli/install#lifecycle-scripts) (and proper user
+  feedback about blocked scripts)
+- [`minimumReleaseAge`](https://bun.com/docs/pm/cli/install#minimum-release-age) (e.g. only install
+  package versions published at least X days ago)
+- Speed 🚀
+- A lot of other improvements around DevEx
+
+As an alternative if you for some reason can't go Bun,
+[pnpm has stepped up in this area](https://pnpm.io/supply-chain-security) and also supports both of
+these security features.
+
+To be honest, I have been waiting for a good reason to prioritise migrating to Bun and this was
+it... So thanks evil hackers, I guess? ¯\\\_(ツ)\_/¯
