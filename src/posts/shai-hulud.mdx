@@ -21,7 +21,7 @@ and ensure we stay safe in the future.
 1. Check if any of our engineers have been compromised:
 
 ```bash
-for user in $(gh api orgs/electricitymaps/members --paginate | jq -r '.[] | .login'); do
+for user in $(gh api orgs/YOUR_ORG/members --paginate | jq -r '.[] | .login'); do
   echo "Checking $user"
   gh repo list $user --source --json name,description --jq '.[] | select(.description | contains("Sha1-Hulud: The Second Coming")) | .name'
 done
