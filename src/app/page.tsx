@@ -75,7 +75,12 @@ const Home = async () => {
     <React.Fragment>
       <main className="container mx-auto flex h-full flex-col items-center justify-between pt-4 pb-10 sm:pt-8 dark:text-white">
         <section>
-          <header className="mb-8 flex flex-col items-center text-center">
+          <header className="mb-2 flex flex-col items-center text-center">
+            <div className="flex flex-row space-x-4">
+              {/* <NavLink href="/">/</NavLink> */}
+              <NavLink href="/about">About</NavLink>
+              {/* <NavLink href="/uses">Uses</NavLink> */}
+            </div>
             <h1 className="animate-rainbow-text to-pink my-4 mb-1 bg-gradient-to-r from-[#3494E6] via-[#5961DF] bg-clip-text pb-1 text-4xl font-bold text-transparent sm:text-6xl dark:via-[#fcff9e]">
               Mads Nedergaard
             </h1>
@@ -96,11 +101,6 @@ const Home = async () => {
                 fill="none"
               />
             </svg>
-            <div className="flex flex-row space-x-4">
-              {/* <NavLink href="/">Thoughts</NavLink> */}
-              <NavLink href="/about">About</NavLink>
-              {/* <NavLink href="/uses">Uses</NavLink> */}
-            </div>
           </header>
           <div
             className={`flex max-w-lg flex-col ${
