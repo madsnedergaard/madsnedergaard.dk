@@ -14,7 +14,7 @@ function Content() {
         <section>
           <h2>Work</h2>
           <p>
-            I’m a <s>full</s> <a href="https://boringtechnology.club/">dull</a> stack software
+            I’m a <s>full</s> <a href="https://boringtechnology.club/">dull</a> stack product
             engineer, mainly working in TS-land with a bit of Python on the side. Facts:
           </p>
           <ul>
@@ -33,12 +33,12 @@ function Content() {
         </section>
         <section>
           <h2>Personal</h2>
-          <p>Outside of work family is my main priority, but occasionally I try to also: </p>
+          <p>Outside of work I have two small kids, but occasionally I try to also: </p>
           <ul>
             <li>keep up with the veggie garden</li>
             <li>grow edible mushrooms (wine caps, lions mane, oysters)</li>
             <li>wakeboard at a local cable park (I’m still a noob though)</li>
-            <li>Automate our home</li>
+            <li>Automate our old house</li>
             <li>
               Hit the roads on my road bike (don’t check my Strava please, it’s kinda embarrassing
               these days)
