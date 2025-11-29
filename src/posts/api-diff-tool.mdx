@@ -1,0 +1,83 @@
+---
+title: 'API snapshot testing against production'
+createdAt: '29/11/2025'
+---
+
+import { TLDR, Disclaimer, Subtle } from '@/components/Callout';
+
+## Motivation
+
+At Electricity Maps, we care deeply about our API users. We're proud of our years of 100% uptime
+(except for that _one_ CloudFlare outage...) and we want to keep delivering new features and signals
+at a rapid pase.
+
+We had the basics in place (unit tests, types, e2e tests), but I wanted to take it one step further
+and do something that would give engineers an extremely high confidence about their changes before
+pushing that green button to merge and deploy.
+
+## Solution
+
+The best mock data is real data - and the best mock server is our production server. So I built a
+tool that:
+
+1. calls all requests in a Postman collection using production environment
+2. Save the responses
+3. Repeat for local environment (connected to prod DB or replica)
+4. Diff the responses
+
+![Fetching the API responses](../../public/api-snapshot-tool.png 'Fetching and comparing the API responses')
+
+In short this is a glorified
+[characterization test](https://en.wikipedia.org/wiki/Characterization_test) (also known as
+[Golden Master Testing](https://blog.thecodewhisperer.com/permalink/surviving-legacy-code-with-golden-master-and-sampling)),
+but with real data instead of snapshots that can drift. This is powered by a Postman collection for
+automating the calls, so as a bonus it helps us ensure we have proper coverage of our API in Postman
+for all engineers to enjoy.
+
+The tool also runs any
+[Postman tests](https://learning.postman.com/docs/tests-and-scripts/write-scripts/test-scripts/) on
+your collection, so for our 101 requests it also executes 339 basic tests that checks response codes
+and response structures look as expected for an extra layer of testing.
+
+### Caveats
+
+- It requires that you can read data from the same place as in production - we use
+  [Google Cloud SQL Auth Proxy](https://docs.cloud.google.com/sql/docs/postgres/sql-proxy) to
+  connect locally to a replica of the production database.
+
+- This works great for all requests that don't modify anything on the server (you probably don't
+  want to spam `DELETE /users`), so consider having a separate Postman collection if that is a
+  problem.
+- Make sure you have separate requests for testing various combinations parameters and edge cases.
+- We run this tool manually before merging larger changes - it could be automated, but given the
+  broad range of other automated tests we have this serves as a last verification.
+
+- We could optimise towards fewer calls to the API by
+  [using saved responses in Postman as snapshots](https://medium.com/better-practices/snapshot-testing-for-apis-using-postman-7f9f26295d6b),
+  but those can and will drift - so we'll rather send a bit of extra traffic at prod.
+
+## Implementation
+
+In short it works like this:
+
+**Fetching responses**
+
+1. Use [Newman](https://github.com/postmanlabs/newman) (Postman's CLI/SDK) to run over collection
+2. Use [newman-reporter-csv](https://github.com/matt-ball/newman-reporter-csv#readme) to store
+   responses as CSVs
+   - The JSON reporter returns data as streams, making it hard to diff and it creates massive files
+   - The CSV reporter makes it possible to get response body as plain text, which then allows us to
+     convert that into JSON for a richer diffing and comparison of key-level values later
+3. Ensure the Postman collection uses variables for URL, so you can replace that in the script
+
+**Comparing responses**
+
+1. Use [PapaParse](https://github.com/mholt/PapaParse) for handling CSVs
+2. Ignore responseTime and responseSize columns
+3. Allow ignoring specific keys that differ (such as timestamps and headers)
+4. Diff the response body first, and only if there are any changes go deeper and report on the exact
+   JSON key value differences
+
+---
+
+The code is not yet open source, but I'm happy to share more details if anyone is interested :)
