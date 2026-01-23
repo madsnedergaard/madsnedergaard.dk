@@ -94,8 +94,8 @@ export const Disclaimer = ({ children }: { children: React.ReactNode }) => (
   </Callout>
 );
 
-export const Subtle = ({ children }: { children: React.ReactNode }) => (
-  <Callout icon={<FlagIcon size={18} strokeWidth={2} />} color="gray">
+export const Subtle = ({ size, children }: { size: Size; children: React.ReactNode }) => (
+  <Callout icon={<FlagIcon size={18} strokeWidth={2} />} color="gray" size={size}>
     {children}
   </Callout>
 );
