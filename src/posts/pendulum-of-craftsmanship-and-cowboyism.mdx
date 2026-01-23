@@ -1,0 +1,89 @@
+---
+title: 'A pendulum of craftsmanship and cowboyism'
+createdAt: '22/01/2026'
+---
+
+import { TLDR, Disclaimer, Subtle } from '@/components/Callout';
+
+As a software engineer, we all find ourselves somewhere on the scale between obsessive craftsmanship
+and cowboy coding.
+
+After some years in the game, you will most likely have worked with both extremes:
+
+::A):: The people that are so obsessed with pure code and creating a beautiful, scalable system -
+but ends up hurting the business because they spent time designing the ideal architecture instead of
+learning about their customers
+
+::B):: The people that move so fast and introduce so much spagetti code that it becomes almost
+impossible to maintain and potentially pivot
+
+While some people build their identity and maybe even career based on being in one of these camps,
+I’d argue that most of us (at least in startups) should rather be on a pendulum.
+
+<Disclaimer size="sm">
+  Unless you build software that controls nuclear reactors, then please stay obsessive.
+</Disclaimer>
+
+There are times and areas where quick progress can ensure faster learning and there’s time when
+truly obsessing over the smallest detail can make the biggest impact.
+
+Working on an internal tool is very different from working on your product's primary onboarding
+flow!
+
+This has always been the case and the cowboys have been around forever, but with generative AI it
+has definitely lowered the barrier of entry: Now anyone can be a cowboy and that same cowboy can
+output 5x the amount of spagetti code 10x faster.
+
+## How to deal with it
+
+There is not a clear answer to when either is correct, so the art of software engineering today is
+all about knowing when to swing that pendulum and how hard. **You** know best what areas requires
+most attention, and whether certain features are fundamental building blocks or quick, walled-off
+experiments.
+
+Also remember that when you take the easy route and just prompt your way through, there's most
+likely someone else on your team that will have to review that code much more thoroughly - so your
+speed comes at the expense of their time.
+
+### Align your team
+
+What is most important is that you and your team are openly talking and aligning on what mode you’re
+in and what the company needs right now - otherwise you end up with a lot of tension and clashes
+when:
+
+1. Your team is annoyed that you are going too slow or being too nitpicky
+2. Your team is annoyed that you are going too fast and introducing too much tech debt
+
+### Invest in tooling
+
+Make the (developer) tools speak on their own and guide the cowboys if they are moving too fast:
+
+- Invest in strong linting, typechecking and code quality tooling. Embrace opinionated ESLint rules.
+- Build strong LLM instrumentation (`agents.md`, skills, whatever the smart new thing is when you
+  read this) that helps LLMs follow your best practices and use the right patterns.
+- Get automated code reviews on PRs to catch the obvious mistakes.
+- Enforce test coverage levels - LLMs are great at writing unit tests, so take advantage of it.
+
+### Measure the tech debt
+
+Sometimes adding tech debt is fine and in general you should be ready to drop your guards and
+question yourself: How much does it matter that this code isn't perfect?
+
+I quite like the framework from
+[Taxonomy of Tech Debt](https://technology.riotgames.com/news/taxonomy-tech-debt) for evaluating the
+code and whether it matters:
+
+1. Impact - does it affect end-users? Performance problems, bugs, etc.
+2. Fix cost - how easy is it to fix it now vs later?
+3. Contagiousness - how much will this code be copy-pasted around and spread through the system?
+
+---
+
+No matter where the world of software engineering is going (and who knows these days), I'd argue
+that we will always have some sort of scale to move between and we will always have to swing the
+pendulum between craftsmanship and cowboyism.
+
+<Subtle size="sm">
+  This idea was inspired by Dave Smith from [Soft Skills Engineering](https://softskills.audio/)
+  podcast episode 464, highly recommend following the show!
+</Subtle>
