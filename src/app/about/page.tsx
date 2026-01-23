@@ -1,6 +1,5 @@
 import Header from '@/components/Header';
 import NavLink from '@/components/NavLink';
-import Link from 'next/link';
 
 function Content() {
   const firstDayOfWork = new Date('2014-02-01');
@@ -19,9 +18,8 @@ function Content() {
           </p>
           <ul>
             <li>{timeAtWork} years of coding professionally</li>
-            <li>I get high on solving real problems for real people </li>
-            <li>Early-stage-ish startups is my happy place</li>
-
+            <li>I get high on solving real problems for real people</li>
+            <li>Thriving in startups where impact is high</li>
             <li>
               Swinging{' '}
               <a href="https://charity.wtf/2017/05/11/the-engineer-manager-pendulum/">
