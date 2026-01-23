@@ -35,7 +35,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       // oxlint-disable-next-line no-html-link-for-pages
       <a
         href={href}
-        className="hover:text-primary underline-offset-3 transition-all hover:underline-offset-4 dark:text-[#a3a7dd]"
+        className="hover:text-primary underline-offset-3 transition-all hover:underline-offset-4"
       >
         {children}
       </a>
