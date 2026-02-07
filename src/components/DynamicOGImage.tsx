@@ -20,7 +20,15 @@ export async function loadGoogleFont(font: string, text: string, weight: number 
 }
 
 // Image generation
-export default function DynamicOGImage({ title, subtitle }: { title: string; subtitle: string }) {
+export default function DynamicOGImage({
+  title,
+  titleSize = 70,
+  subtitle,
+}: {
+  title: string;
+  titleSize?: number;
+  subtitle: string;
+}) {
   return (
     <div
       style={{
@@ -38,7 +46,7 @@ export default function DynamicOGImage({ title, subtitle }: { title: string; sub
     >
       <div
         style={{
-          fontSize: 70,
+          fontSize: titleSize,
           fontWeight: 700,
           fontFamily: 'Inter',
           background: 'linear-gradient(to right,#fcff9e, #ec6ead)',
