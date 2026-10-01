@@ -1,4 +1,4 @@
-import { cn } from '@/utils/cn';
+import { cn } from 'cn';
 import type { MDXComponents } from 'mdx/types';
 import Image, { ImageProps } from 'next/image';
 import Link from 'next/link';

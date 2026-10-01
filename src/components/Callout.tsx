@@ -1,5 +1,5 @@
 import { BookOpenTextIcon, FlagIcon } from 'lucide-react';
-import { cn } from '@/utils/cn';
+import { cn } from 'cn';
 
 type Size = 'sm' | 'md';
 

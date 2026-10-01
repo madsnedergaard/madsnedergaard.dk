@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import NavLink from './NavLink';
-import { cn } from '@/utils/cn';
+import { cn } from 'cn';
 
 export default function Header({ className }: { className?: string }) {
   return (
