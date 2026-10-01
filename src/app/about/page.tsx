@@ -1,74 +1,34 @@
+import Avatar from '@/components/Avatar';
 import Header from '@/components/Header';
 import NavLink from '@/components/NavLink';
 
-function Content() {
+const Link = ({ children, href }: { children: React.ReactNode; href: string }) => (
+  <a
+    href={href}
+    className="hover:text-primary underline-offset-3 transition-all hover:underline-offset-4"
+  >
+    {children}
+  </a>
+);
+
+export default async function Page() {
   const firstDayOfWork = new Date('2014-02-01');
   const timeSinceFirstDayOfWork = new Date().getTime() - firstDayOfWork.getTime();
   const millisecondsPerYear = 365.25 * 24 * 60 * 60 * 1000;
   const timeAtWork = Math.round((timeSinceFirstDayOfWork / millisecondsPerYear) * 100) / 100;
 
   return (
-    <main>
-      <div className={`mx-auto grid gap-2 sm:grid-cols-2 sm:gap-4`}>
-        <section>
-          <h2>Work</h2>
-          <p>
-            I’m a <s>full</s> <a href="https://boringtechnology.club/">dull</a> stack product
-            engineer, mainly working in TS-land with a bit of Python on the side. Facts:
-          </p>
-          <ul>
-            <li>{timeAtWork} years of coding professionally</li>
-            <li>I get high on solving real problems for real people</li>
-            <li>Thriving in startups where impact is high</li>
-            <li>
-              Swinging{' '}
-              <a href="https://charity.wtf/2017/05/11/the-engineer-manager-pendulum/">
-                the pendulum of IC/lead
-              </a>{' '}
-              roles, but I keep getting drawn back into the magic of code 🪄
-            </li>
-          </ul>
-        </section>
-        <section>
-          <h2>Personal</h2>
-          <p>Outside of work I have two small kids, but occasionally I try to also: </p>
-          <ul>
-            <li>keep up with the veggie garden</li>
-            <li>grow edible mushrooms (wine caps, lions mane, oysters)</li>
-            <li>wakeboard at a local cable park (I’m still a noob though)</li>
-            <li>Automate our old house</li>
-            <li>
-              Hit the roads on my road bike (don’t check my Strava please, it’s kinda embarrassing
-              these days)
-            </li>
-          </ul>
-        </section>
-      </div>
-      <div className="flex flex-col items-center">
-        <h3>Elsewhere on the internet</h3>
-        <div className="flex flex-row space-x-4">
-          <NavLink href="https://github.com/madsnedergaard">Github</NavLink>
-          <NavLink href="https://linkedin.com/in/madsnedergaard">LinkedIn</NavLink>
-          <NavLink href="https://bsky.app/profile/madsnedergaard.dk">BlueSky</NavLink>
-
-          <NavLink href="https://www.goodreads.com/user/show/16531967-mads-nedergaard">
-            Goodreads
-          </NavLink>
-        </div>
-      </div>
-    </main>
-  );
-}
-
-export default async function Page() {
-  return (
     <div>
       <Header className="max-w-screen-lg" />
       <article className="prose prose-zinc prose-h2:mt-4 dark:prose-invert mx-auto max-w-screen-lg px-8 pb-8 md:px-2 lg:px-2">
-        <div className="text-center sm:mt-12">
+        <div className="text-center sm:mt-2">
           <h1 className="m-4 mb-3 text-3xl font-bold sm:text-4xl">About me</h1>
+          <p className="mt-2 text-sm text-zinc-400 dark:text-zinc-500">
+            You found your way here, <br />
+            so an introduction seems in place...
+          </p>
           <svg
-            className="mx-auto mt-6 mb-8 h-4 w-80 text-zinc-500 dark:text-zinc-700"
+            className="mx-auto mt-6 mb-4 h-4 w-60 text-zinc-500 sm:mb-8 sm:w-80 dark:text-zinc-700"
             viewBox="0 0 320 16"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -83,8 +43,48 @@ export default async function Page() {
           </svg>
         </div>
 
-        <section>
-          <Content />
+        <section className="mx-auto flex flex-col items-center text-pretty">
+          <div className="flex max-w-sm flex-col items-center text-center sm:flex-row sm:gap-4 sm:text-left">
+            <h2 className="text-pretty">
+              I'm Mads,
+              <br />
+              <span className="text-primary">software engineer</span> at work and{' '}
+              <span className="text-yellow">dad with a garden</span> at home.
+            </h2>
+            <Avatar />
+          </div>
+          <div className="flex w-full max-w-[40ch] flex-col text-left text-pretty">
+            <p>
+              These days I'm <span className="text-pink">staff engineer</span> at{' '}
+              <Link href="https://electricitymaps.com/">Electricity Maps</Link>, but I'll happily
+              put on the hat that best allows solving <strong>real problems for real people</strong>
+              .
+            </p>
+            <p>
+              I have been working full-stack for the last{' '}
+              <span className="text-yellow">
+                <span className="tabular-nums">{timeAtWork}</span> years
+              </span>
+              , mostly in the <span className="text-pink">land of TS/JS</span> with side quests in
+              Python and PHP. While I've been swinging{' '}
+              <Link href="https://charity.wtf/2017/05/11/the-engineer-manager-pendulum/">
+                the pendulum of IC / technical leadership
+              </Link>
+              , I could never completely leave behind the{' '}
+              <span className="glitch-effect">magic of code 🪄</span>
+            </p>
+          </div>
+          <div className="mt-4 flex flex-col items-center">
+            <div className="flex flex-row space-x-4">
+              <NavLink href="https://github.com/madsnedergaard">Github</NavLink>
+              <NavLink href="https://linkedin.com/in/madsnedergaard">LinkedIn</NavLink>
+              <NavLink href="https://bsky.app/profile/madsnedergaard.dk">BlueSky</NavLink>
+
+              <NavLink href="https://www.goodreads.com/user/show/16531967-mads-nedergaard">
+                Goodreads
+              </NavLink>
+            </div>
+          </div>
         </section>
       </article>
     </div>

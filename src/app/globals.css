@@ -67,3 +67,68 @@ div#__next > div {
     --tw-prose-bullets: var(--color-primary);
   }
 }
+
+@keyframes bg-position {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 400%;
+  }
+}
+
+.glowing-hover-effect {
+  position: relative;
+}
+.glowing-hover-effect:before {
+  transition: 0.5s;
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  z-index: -1;
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background-size: 400%;
+  border-radius: 40px;
+  opacity: 0;
+  transition: 0.5s;
+}
+.glowing-hover-effect:hover:before {
+  filter: blur(20px);
+  opacity: 1;
+  animation: bg-position 8s linear infinite;
+  transition: 0.5s;
+}
+
+@keyframes glitch {
+  0%,
+  8%,
+  100% {
+    transform: translate(0);
+    text-shadow: none;
+  }
+  2% {
+    transform: translate(-2px, 1px);
+    text-shadow: 2px 0 #ff0000;
+  }
+  4% {
+    transform: translate(2px, -1px);
+    text-shadow: -2px 0 #00ffff;
+  }
+  6% {
+    transform: translate(-1px, 2px);
+    text-shadow: 1px 0 #ff0000;
+  }
+  7% {
+    transform: translate(1px, -2px);
+    text-shadow: -1px 0 #00ffff;
+  }
+}
+
+.glitch-effect {
+  display: inline-block;
+  animation: glitch 3s infinite;
+  animation-timing-function: steps(1);
+}
