@@ -2,7 +2,7 @@ import { PostMeta } from '../utils/posts';
 import { AIBadge } from './AIBadge';
 
 export const PostIntro = ({ data }: { data: PostMeta }) => (
-  <div className="text-center sm:mt-12">
+  <div className="text-center sm:mt-6">
     <AIBadge />
     <h1
       className="m-4 mb-3 text-3xl font-bold sm:text-4xl"

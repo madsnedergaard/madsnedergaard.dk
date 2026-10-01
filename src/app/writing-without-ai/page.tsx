@@ -7,10 +7,10 @@ export default async function Page() {
     <div>
       <Header />
       <article className="prose prose-zinc dark:prose-invert container mx-auto px-4 pb-8 sm:px-2">
-        <div className="text-center sm:mt-12">
+        <div className="text-center sm:mt-6">
           <h1 className="m-4 mb-3 text-3xl font-bold sm:text-4xl">Writing without AI</h1>
           <svg
-            className="mx-auto mt-6 mb-8 h-4 w-80 text-zinc-500 dark:text-zinc-700"
+            className="mx-auto mt-6 mb-8 h-4 w-60 text-zinc-500 sm:w-80 dark:text-zinc-700"
             viewBox="0 0 320 16"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

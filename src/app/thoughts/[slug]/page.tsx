@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         <article className="prose prose-zinc dark:prose-invert prose-code:before:content-none prose-code:after:content-none container mx-auto px-4 pb-8 sm:px-2">
           <PostIntro data={meta} />
           <svg
-            className="mx-auto mt-6 mb-8 h-4 w-80 text-zinc-500 dark:text-zinc-700"
+            className="mx-auto mt-6 mb-8 h-4 w-60 text-zinc-500 sm:w-80 dark:text-zinc-700"
             viewBox="0 0 320 16"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

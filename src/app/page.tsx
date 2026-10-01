@@ -88,7 +88,7 @@ const Home = async () => {
               &mdash; and a collection of thoughts on all things software
             </p>
             <svg
-              className="mx-auto mt-6 mb-6 h-4 w-80 text-zinc-500 dark:text-zinc-700"
+              className="mx-auto mt-6 mb-6 h-4 w-60 text-zinc-500 sm:w-80 dark:text-zinc-700"
               viewBox="0 0 320 16"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
