@@ -102,6 +102,13 @@ div#__next > div {
   transition: 0.5s;
 }
 
+/* WebKit can paint rectangular artifacts when animating these gradient backgrounds. */
+@supports (background: -webkit-named-image(i)) {
+  .glowing-hover-effect:hover:before {
+    animation: none;
+  }
+}
+
 @keyframes glitch {
   0%,
   8%,
