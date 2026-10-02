@@ -54,7 +54,7 @@ export default async function Page() {
             </h2>
             <Avatar />
           </div>
-          <div className="flex w-full max-w-[40ch] flex-col text-center sm:text-left [&>p+p]:mt-3 [&>p:not(:last-child)]:mb-0">
+          <div className="flex w-full max-w-[40ch] flex-col text-center sm:text-left sm:[&>p+p]:mt-3 [&>p:not(:last-child)]:mb-0">
             <p>
               Currently working as <Highlight variant="pink">Staff Engineer</Highlight> at{' '}
               <Link href="https://electricitymaps.com/">Electricity Maps</Link>, doing my best to
