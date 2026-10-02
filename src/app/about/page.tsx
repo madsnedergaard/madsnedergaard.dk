@@ -50,7 +50,7 @@ export default async function Page() {
               I'm Mads,
               <br />
               <Highlight>software engineer</Highlight> at work and{' '}
-              <Highlight variant="pink">dad with a garden</Highlight> at home.
+              <Highlight variant="yellow">dad with a garden</Highlight> at home.
             </h2>
             <Avatar />
           </div>
