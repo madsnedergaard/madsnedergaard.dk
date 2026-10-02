@@ -11,7 +11,7 @@
 @theme {
   --color-primary: light-dark(#5961df, #8c91d8);
   --color-pink: #ec6ead;
-  --color-yellow: #fcff9e;
+  --color-yellow: light-dark(#fd9a00, #fcff9e);
   --animate-rainbow-text: rainbow-text 3s ease infinite;
 
   @keyframes rainbow-text {

@@ -1,5 +1,6 @@
 import Avatar from '@/components/Avatar';
 import Header from '@/components/Header';
+import Highlight from '@/components/Highlight';
 import NavLink from '@/components/NavLink';
 
 const Link = ({ children, href }: { children: React.ReactNode; href: string }) => (
@@ -48,29 +49,32 @@ export default async function Page() {
             <h2 className="text-pretty">
               I'm Mads,
               <br />
-              <span className="text-primary">software engineer</span> at work and{' '}
-              <span className="text-yellow">dad with a garden</span> at home.
+              <Highlight>software engineer</Highlight> at work and{' '}
+              <Highlight variant="pink">dad with a garden</Highlight> at home.
             </h2>
             <Avatar />
           </div>
-          <div className="flex w-full max-w-[40ch] flex-col text-left text-pretty">
+          <div className="flex w-full max-w-[40ch] flex-col text-center sm:text-left [&>p+p]:mt-3 [&>p:not(:last-child)]:mb-0">
             <p>
-              These days I'm <span className="text-pink">staff engineer</span> at{' '}
-              <Link href="https://electricitymaps.com/">Electricity Maps</Link>, but I'll happily
-              put on the hat that best allows solving <strong>real problems for real people</strong>
-              .
+              Currently working as <Highlight variant="pink">Staff Engineer</Highlight> at{' '}
+              <Link href="https://electricitymaps.com/">Electricity Maps</Link>, doing my best to
+              make the world a greener place and solving{' '}
+              <strong>real problems for real people</strong>.
             </p>
             <p>
-              I have been working full-stack for the last{' '}
-              <span className="text-yellow">
+              I have been doing full-stack for the last{' '}
+              <Highlight variant="pink">
                 <span className="tabular-nums">{timeAtWork}</span> years
-              </span>
-              , mostly in the <span className="text-pink">land of TS/JS</span> with side quests in
-              Python and PHP. While I've been swinging{' '}
+              </Highlight>
+              , mostly in the <Highlight variant="pink">land of TS/JS</Highlight> with side quests
+              in Python and PHP.
+            </p>
+            <p className="">
+              While I have been swinging{' '}
               <Link href="https://charity.wtf/2017/05/11/the-engineer-manager-pendulum/">
                 the pendulum of IC / technical leadership
               </Link>
-              , I could never completely leave behind the{' '}
+              , I keep finding myself drawn back into the{' '}
               <span className="glitch-effect">magic of code 🪄</span>
             </p>
           </div>
