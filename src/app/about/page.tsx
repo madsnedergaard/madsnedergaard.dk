@@ -24,10 +24,6 @@ export default async function Page() {
       <article className="prose prose-zinc prose-h2:mt-4 dark:prose-invert mx-auto max-w-screen-lg px-8 pb-8 md:px-2 lg:px-2">
         <div className="text-center sm:mt-2">
           <h1 className="m-4 mb-3 text-3xl font-bold sm:text-4xl">About me</h1>
-          <p className="mt-2 text-sm text-zinc-400 dark:text-zinc-500">
-            You found your way here, <br />
-            so an introduction seems in place...
-          </p>
           <svg
             className="mx-auto mt-6 mb-4 h-4 w-60 text-zinc-500 sm:mb-8 sm:w-80 dark:text-zinc-700"
             viewBox="0 0 320 16"
