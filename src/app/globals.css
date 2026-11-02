@@ -77,10 +77,10 @@ div#__next > div {
   }
 }
 
-.glowing-hover-effect {
+.glowing-effect {
   position: relative;
 }
-.glowing-hover-effect:before {
+.glowing-effect:before {
   transition: 0.5s;
   content: '';
   position: absolute;
@@ -92,19 +92,13 @@ div#__next > div {
   background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
   background-size: 400%;
   border-radius: 40px;
-  opacity: 0;
-  transition: 0.5s;
-}
-.glowing-hover-effect:hover:before {
   filter: blur(20px);
-  opacity: 1;
   animation: bg-position 8s linear infinite;
-  transition: 0.5s;
 }
 
 /* WebKit can paint rectangular artifacts when animating these gradient backgrounds. */
 @supports (background: -webkit-named-image(i)) {
-  .glowing-hover-effect:hover:before {
+  .glowing-effect:before {
     animation: none;
   }
 }
