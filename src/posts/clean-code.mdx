@@ -1,0 +1,81 @@
+---
+title: 'What is clean code to you?'
+createdAt: '02/11/2026'
+---
+
+A while ago, I was asked a question:
+
+> What is clean code to you?
+
+At first, I immediately started reciting uncle Bob, but that book was written in 2008 and a lot has changed since then.
+And does it still hold true in this age of AI? Does clean code even matter any longer?
+
+Drumroll, but **I still believe it does** (luckily that means I can keep rambling too\_).<br />
+Will it be software engineers crafting nice and clean code though? Probably not.
+
+But at least for the time being, we are the ones setting the guardrails, steering the automated systems that monitor code quality and supporting the agents that can improve it.
+
+And after all, clean code also makes:
+
+- happier humans (for the ones that still get to look at code),
+- better agents with good patterns they can build from and upon,
+- stronger applications with fewer bugs,
+- maintainablerer (coining that!) code
+
+## So too me, clean code is…
+
+### 1. Self explanatory
+
+More than anything, clean code just make senses and anyone can read it have a good idea of what's going on, even without knowing the low-level details underneath.
+
+It's about **naming things well**, so that things do exactly and only what the name says they will do. Parameters should be few and obvious, reading code shouldn't require looking up definitions all the time.
+
+**Anti-pattern:**
+A good sign that something is off is files with more lines of Claude-generated comments explaining what is going on than actual code.
+
+### 2. Isolated
+
+The more isolated a piece of code can be, the easier it is to test it, reason about it and re-use it.
+Doing fewer things at once makes refactoring easier and it helps the agents burn less tokens too.
+
+But there's a limit: Having to jump around in the codebase because everything is split into the tiniest atoms is also not a great experience (sorry uncle Bob).
+
+**Anti-pattern:**
+When the unit test created by AI has to be extremely complex in order to test a function, it's usually a sign that it's doing too much or there there's too many side-effects.
+
+### 3. Balancing DRY and duplication
+
+Abstractions are cool, but there's a tricky balance to be maintained - often duplicating code leads to a more predictable and understandable system. As of Q3 2026 (side-note, but it's crazy how just adding the year here isn't enough with the current speed of LLM development), this is probably where I find human software engineering judgement is still most valuable.
+
+Agents will do whatever to achieve their goal with the least resistance, so if you're not careful here, you can end up with either
+
+- **overly duplicative patterns**: agents don't mind adding 5 extra parameters to a function wherever it's used instead of creating the right abtraction once.
+- **overly complex abstractions**: agents (and humans) can easily fall prey to the idea that "this piece should be able to handle all sorts of future scenarios"
+
+As a general rule, aim for [duplication over the wrong abstraction](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction).
+
+### 4. Co-located
+
+Putting things as close together as possible makes it easier to understand the context and navigate the codebase.
+The closer the better: Keep things in the same file until it grows top big, then keep things in the same folder until it grows too big.
+It's significantly easier to read and work with code when you can swiftly grasp the bigger picture than having to remember names in order to search for the right thing.
+
+**Anti-pattern:**
+When a single module or component is split across a lot of files, positioned far away in different areas.
+At first it might seem smart to group files based on their types (for frontend it's been common to have all components in one folder, styles in another, utils in a third, etc.),
+but as the codebase grows it makes it much harder to find the required context needed to understand a particular area.
+
+### 4. Boring
+
+Boring code means there's no surprises, there's no "clever" obfuscations to achieve miniscule gains in performance or codebase size.
+
+Boring code can still be elegant.
+
+**Anti-pattern:**
+When you need an LLM to explain what a small piece of code actually does because it's too smart.
+
+---
+
+With all that said, I feel obliged to end this with [a quote from Dan Abramov](https://overreacted.io/goodbye-clean-code/):
+
+> Clean code is not a goal. It’s an attempt to make some sense out of the immense complexity of systems we’re dealing with
