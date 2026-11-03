@@ -75,7 +75,7 @@ const Home = async () => {
     <React.Fragment>
       <main className="container mx-auto flex h-full flex-col items-center justify-between pt-4 pb-10 sm:pt-8 dark:text-white">
         <section>
-          <header className="mb-2 flex flex-col items-center text-center">
+          <header className="mb-2 flex flex-col items-center px-2 text-center">
             <div className="flex flex-row space-x-4">
               {/* <NavLink href="/">/</NavLink> */}
               <NavLink href="/about">About</NavLink>
@@ -85,7 +85,7 @@ const Home = async () => {
               Mads Nedergaard
             </h1>
             <p className="text-zinc-500 italic">
-              &mdash; and a collection of thoughts on all things software
+              &mdash; and his collection of thoughts on all things software
             </p>
             <svg
               className="mx-auto mt-6 mb-6 h-4 w-60 text-zinc-500 sm:w-80 dark:text-zinc-700"
