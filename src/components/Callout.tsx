@@ -88,9 +88,17 @@ export const TLDR = ({ size, children }: { size: Size; children: React.ReactNode
   </Callout>
 );
 
-export const Disclaimer = ({ size, children }: { size: Size; children: React.ReactNode }) => (
+export const Disclaimer = ({
+  size,
+  title,
+  children,
+}: {
+  size: Size;
+  title?: string;
+  children: React.ReactNode;
+}) => (
   <Callout
-    title="Disclaimer"
+    title={title ?? 'Disclaimer'}
     icon={<FlagIcon size={18} strokeWidth={2} />}
     color="yellow"
     size={size}
